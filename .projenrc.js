@@ -13,6 +13,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/custom-resources',
   ],
   dependabot: false,
+  releaseBranches: ['main'],
 });
 
 const common_exclude = ['cdk.out', 'cdk.context.json', 'images', 'yarn-error.log'];
