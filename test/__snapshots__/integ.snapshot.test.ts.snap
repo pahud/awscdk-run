@@ -1,0 +1,411 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integ snapshot validation 1`] = `
+Object {
+  "Parameters": Object {
+    "AssetParameters4a3609ad912843e581892f37ae9d6fb0fa1648b547693aaa562b0119452b8956ArtifactHashD15A2D11": Object {
+      "Description": "Artifact hash for asset \\"4a3609ad912843e581892f37ae9d6fb0fa1648b547693aaa562b0119452b8956\\"",
+      "Type": "String",
+    },
+    "AssetParameters4a3609ad912843e581892f37ae9d6fb0fa1648b547693aaa562b0119452b8956S3Bucket72B03BC9": Object {
+      "Description": "S3 bucket for asset \\"4a3609ad912843e581892f37ae9d6fb0fa1648b547693aaa562b0119452b8956\\"",
+      "Type": "String",
+    },
+    "AssetParameters4a3609ad912843e581892f37ae9d6fb0fa1648b547693aaa562b0119452b8956S3VersionKey520B7554": Object {
+      "Description": "S3 key for asset version \\"4a3609ad912843e581892f37ae9d6fb0fa1648b547693aaa562b0119452b8956\\"",
+      "Type": "String",
+    },
+    "githubRepoName": Object {
+      "Default": "pahud/aws-cdk-serverless-sample",
+      "Description": "The name github repo e.g. pahud/aws-cdk-serverless-sample",
+      "Type": "String",
+    },
+    "stackName": Object {
+      "Default": "",
+      "Description": "Custom stack name for the CDK stack to deploy",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "AWS679f53fac002430cb0da5b7982bd22872D164C4C": Object {
+      "DependsOn": Array [
+        "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParameters4a3609ad912843e581892f37ae9d6fb0fa1648b547693aaa562b0119452b8956S3Bucket72B03BC9",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters4a3609ad912843e581892f37ae9d6fb0fa1648b547693aaa562b0119452b8956S3VersionKey520B7554",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParameters4a3609ad912843e581892f37ae9d6fb0fa1648b547693aaa562b0119452b8956S3VersionKey520B7554",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Timeout": 120,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CDKRunDemoProject86EBB8A2": Object {
+      "Properties": Object {
+        "Artifacts": Object {
+          "Type": "NO_ARTIFACTS",
+        },
+        "EncryptionKey": "alias/aws/s3",
+        "Environment": Object {
+          "ComputeType": "BUILD_GENERAL1_SMALL",
+          "EnvironmentVariables": Array [
+            Object {
+              "Name": "CUSTOM_STACK_NAME",
+              "Type": "PLAINTEXT",
+              "Value": Object {
+                "Ref": "stackName",
+              },
+            },
+          ],
+          "Image": "aws/codebuild/standard:4.0",
+          "ImagePullCredentialsType": "CODEBUILD",
+          "PrivilegedMode": true,
+          "Type": "LINUX_CONTAINER",
+        },
+        "ServiceRole": Object {
+          "Fn::GetAtt": Array [
+            "CDKRunDemoProjectCodeBuildProjectRole47F1E9C9",
+            "Arn",
+          ],
+        },
+        "Source": Object {
+          "BuildSpec": "{
+  \\"version\\": \\"0.2\\",
+  \\"phases\\": {
+    \\"install\\": {
+      \\"commands\\": [
+        \\"yarn install\\"
+      ]
+    },
+    \\"build\\": {
+      \\"commands\\": [
+        \\"if [ $CUSTOM_STACK_NAME != \\\\\\"\\\\\\" ]; then npx cdk diff -c stackName=\\\\\\"\${CUSTOM_STACK_NAME}\\\\\\" || return 0; fi\\",
+        \\"if [ $CUSTOM_STACK_NAME != \\\\\\"\\\\\\" ]; then npx cdk deploy -c stackName=\\\\\\"\${CUSTOM_STACK_NAME}\\\\\\" --require-approval=never; fi\\",
+        \\"if [ $CUSTOM_STACK_NAME = \\\\\\"\\\\\\" ]; then npx cdk diff || return 0; fi\\",
+        \\"if [ $CUSTOM_STACK_NAME = \\\\\\"\\\\\\" ]; then npx cdk deploy --require-approval=never; fi\\"
+      ]
+    }
+  }
+}",
+          "Location": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "https://github.com/",
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "/",
+                        Object {
+                          "Ref": "githubRepoName",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                "/",
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "/",
+                        Object {
+                          "Ref": "githubRepoName",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                ".git",
+              ],
+            ],
+          },
+          "ReportBuildStatus": true,
+          "Type": "GITHUB",
+        },
+      },
+      "Type": "AWS::CodeBuild::Project",
+    },
+    "CDKRunDemoProjectCodeBuildProjectRole47F1E9C9": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "codebuild.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/AdministratorAccess",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "CDKRunDemoProjectCodeBuildProjectRoleDefaultPolicy49010D77": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents",
+              ],
+              "Effect": "Allow",
+              "Resource": Array [
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "arn:",
+                      Object {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":logs:",
+                      Object {
+                        "Ref": "AWS::Region",
+                      },
+                      ":",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":log-group:/aws/codebuild/",
+                      Object {
+                        "Ref": "CDKRunDemoProject86EBB8A2",
+                      },
+                    ],
+                  ],
+                },
+                Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "arn:",
+                      Object {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":logs:",
+                      Object {
+                        "Ref": "AWS::Region",
+                      },
+                      ":",
+                      Object {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":log-group:/aws/codebuild/",
+                      Object {
+                        "Ref": "CDKRunDemoProject86EBB8A2",
+                      },
+                      ":*",
+                    ],
+                  ],
+                },
+              ],
+            },
+            Object {
+              "Action": Array [
+                "codebuild:CreateReportGroup",
+                "codebuild:CreateReport",
+                "codebuild:UpdateReport",
+                "codebuild:BatchPutTestCases",
+                "codebuild:BatchPutCodeCoverages",
+              ],
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::Join": Array [
+                  "",
+                  Array [
+                    "arn:",
+                    Object {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":codebuild:",
+                    Object {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    Object {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":report-group/",
+                    Object {
+                      "Ref": "CDKRunDemoProject86EBB8A2",
+                    },
+                    "-*",
+                  ],
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "CDKRunDemoProjectCodeBuildProjectRoleDefaultPolicy49010D77",
+        "Roles": Array [
+          Object {
+            "Ref": "CDKRunDemoProjectCodeBuildProjectRole47F1E9C9",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "CDKRunDemoProjectStartBuildCDKRunDemoProjectStarterA4953E00": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "CDKRunDemoProjectStartBuildCDKRunDemoProjectStarterCustomResourcePolicy835B7D22",
+      ],
+      "Properties": Object {
+        "Create": Object {
+          "action": "startBuild",
+          "parameters": Object {
+            "projectName": Object {
+              "Ref": "CDKRunDemoProject86EBB8A2",
+            },
+          },
+          "physicalResourceId": Object {
+            "id": Object {
+              "Ref": "CDKRunDemoProject86EBB8A2",
+            },
+          },
+          "service": "CodeBuild",
+        },
+        "InstallLatestAwsSdk": true,
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "AWS679f53fac002430cb0da5b7982bd22872D164C4C",
+            "Arn",
+          ],
+        },
+        "Update": Object {
+          "action": "startBuild",
+          "parameters": Object {
+            "projectName": Object {
+              "Ref": "CDKRunDemoProject86EBB8A2",
+            },
+          },
+          "physicalResourceId": Object {
+            "id": Object {
+              "Ref": "CDKRunDemoProject86EBB8A2",
+            },
+          },
+          "service": "CodeBuild",
+        },
+      },
+      "Type": "Custom::AWS",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "CDKRunDemoProjectStartBuildCDKRunDemoProjectStarterCustomResourcePolicy835B7D22": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "codebuild:StartBuild",
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "CDKRunDemoProjectStartBuildCDKRunDemoProjectStarterCustomResourcePolicy835B7D22",
+        "Roles": Array [
+          Object {
+            "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+  },
+}
+`;
