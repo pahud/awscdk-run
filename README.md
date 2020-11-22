@@ -46,7 +46,9 @@ Run `yarn watch` in the 2nd terminal. This will generate `ROOT/lib/integ.default
 Deploy it for the first time.
 
 ```sh
-npx cdk --app lib/integ.default.js diff --parameters stackName=demo --parameters githubRepoName=pahud/aws-cdk-fargate-samplenpx cdk --app lib/integ.default.js deploy --parameters stackName=demo --parameters githubRepoName=pahud/aws-cdk-fargate-sample
+npx cdk --app lib/integ.default.js diff \
+--parameters stackName=demo \
+--parameters githubRepoName=pahud/aws-cdk-fargate-sample
 ```
 
 Now the cloud assembly will be published in your private staging bucket defined in `CDKToolKit`.
