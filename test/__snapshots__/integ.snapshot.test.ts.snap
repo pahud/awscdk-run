@@ -152,10 +152,10 @@ Object {
     },
     \\"build\\": {
       \\"commands\\": [
-        \\"if [ $CUSTOM_STACK_NAME != \\\\\\"\\\\\\" ]; then npx cdk diff -c stackName=\\\\\\"\${CUSTOM_STACK_NAME}\\\\\\" || return 0; fi\\",
-        \\"if [ $CUSTOM_STACK_NAME != \\\\\\"\\\\\\" ]; then npx cdk deploy -c stackName=\\\\\\"\${CUSTOM_STACK_NAME}\\\\\\" --require-approval=never; fi\\",
-        \\"if [ $CUSTOM_STACK_NAME = \\\\\\"\\\\\\" ]; then npx cdk diff || return 0; fi\\",
-        \\"if [ $CUSTOM_STACK_NAME = \\\\\\"\\\\\\" ]; then npx cdk deploy --require-approval=never; fi\\"
+        \\"if [ -n $CUSTOM_STACK_NAME ]; then npx cdk diff -c stackName=\\\\\\"\${CUSTOM_STACK_NAME}\\\\\\" || return 0; fi\\",
+        \\"if [ -n $CUSTOM_STACK_NAME ]; then npx cdk deploy -c stackName=\\\\\\"\${CUSTOM_STACK_NAME}\\\\\\" --require-approval=never; fi\\",
+        \\"if [ -z $CUSTOM_STACK_NAME ]; then npx cdk diff || return 0; fi\\",
+        \\"if [ -z $CUSTOM_STACK_NAME ]; then npx cdk deploy --require-approval=never; fi\\"
       ]
     }
   }
