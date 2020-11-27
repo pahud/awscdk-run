@@ -7,6 +7,10 @@ Parameters:
     Type: String
     Default: ""
     Description: Custom stack name for the CDK stack to deploy
+  extraDeployArguments:
+    Type: String
+    Default: ""
+    Description: extra arguments for cdk deploy
 
 Mappings:
   AssetInfo:
@@ -103,6 +107,9 @@ Resources:
           - Name: CUSTOM_STACK_NAME
             Type: PLAINTEXT
             Value: !Ref stackName
+          - Name: EXTRA_DEPLOY_ARGS
+            Type: PLAINTEXT
+            Value: !Ref extraDeployArguments
         Image: "aws/codebuild/standard:4.0"
         ImagePullCredentialsType: CODEBUILD
         PrivilegedMode: true
@@ -123,7 +130,7 @@ Resources:
               "build": {
                 "commands": [
                   "if [ -n $CUSTOM_STACK_NAME ]; then npx cdk diff -c stackName=\"${CUSTOM_STACK_NAME}\" || return 0; fi",
-                  "if [ -n $CUSTOM_STACK_NAME ]; then npx cdk deploy -c stackName=\"${CUSTOM_STACK_NAME}\" --require-approval=never; fi",
+                  "if [ -n $CUSTOM_STACK_NAME ]; then npx cdk deploy -c stackName=\"${CUSTOM_STACK_NAME}\" --require-approval=never \"${EXTRA_DEPLOY_ARGS}\"; fi",
                   "if [ -z $CUSTOM_STACK_NAME ]; then npx cdk diff || return 0; fi",
                   "if [ -z $CUSTOM_STACK_NAME ]; then npx cdk deploy --require-approval=never; fi"
                 ]
