@@ -3,11 +3,11 @@ const { AwsCdkConstructLibrary } = require('projen');
 const AUTOMATION_TOKEN = 'GITHUB_TOKEN';
 
 const project = new AwsCdkConstructLibrary({
-  authorAddress: "pahudnet@gmail.com",
-  authorName: "Pahud",
-  cdkVersion: "1.73.0",
-  name: "awscdk-run",
-  repository: "https://github.com/pahud/awscdk-run.git",
+  authorAddress: 'pahudnet@gmail.com',
+  authorName: 'Pahud',
+  cdkVersion: '1.73.0',
+  name: 'awscdk-run',
+  repository: 'https://github.com/pahud/awscdk-run.git',
   cdkDependencies: [
     '@aws-cdk/core',
     '@aws-cdk/aws-codebuild',
