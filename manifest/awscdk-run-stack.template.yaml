@@ -129,10 +129,10 @@ Resources:
               },
               "build": {
                 "commands": [
-                  "if [ -n $CUSTOM_STACK_NAME ]; then npx cdk diff -c stackName=\"${CUSTOM_STACK_NAME}\" || return 0; fi",
-                  "if [ -n $CUSTOM_STACK_NAME ]; then npx cdk deploy -c stackName=\"${CUSTOM_STACK_NAME}\" --require-approval=never \"${EXTRA_DEPLOY_ARGS}\"; fi",
-                  "if [ -z $CUSTOM_STACK_NAME ]; then npx cdk diff || return 0; fi",
-                  "if [ -z $CUSTOM_STACK_NAME ]; then npx cdk deploy --require-approval=never; fi"
+                  "if [ -n $CUSTOM_STACK_NAME ]; then npx cdk diff -c stackName=\"${CUSTOM_STACK_NAME}\" ${EXTRA_DEPLOY_ARGS} || return 0; fi",
+                  "if [ -n $CUSTOM_STACK_NAME ]; then npx cdk deploy -c stackName=\"${CUSTOM_STACK_NAME}\" --require-approval=never ${EXTRA_DEPLOY_ARGS}; fi",
+                  "if [ -z $CUSTOM_STACK_NAME ]; then npx cdk diff ${EXTRA_DEPLOY_ARGS} || return 0; fi",
+                  "if [ -z $CUSTOM_STACK_NAME ]; then npx cdk deploy --require-approval=never ${EXTRA_DEPLOY_ARGS}; fi"
                 ]
               }
             }
