@@ -15,7 +15,7 @@ const project = new AwsCdkConstructLibrary({
     '@aws-cdk/custom-resources',
   ],
   dependabot: false,
-  releaseBranches: ['main'],
+  releaseEveryCommit: false,
 });
 
 // create a custom projen and yarn upgrade workflow
