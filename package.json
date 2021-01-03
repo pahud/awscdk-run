@@ -29,7 +29,7 @@
     "organization": false
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.73.0",
+    "@aws-cdk/assert": "^1.82.0",
     "@types/jest": "^26.0.15",
     "@types/node": "^10.17.0",
     "@typescript-eslint/eslint-plugin": "^4.3.0",
@@ -46,23 +46,23 @@
     "jsii-pacmak": "^1.14.1",
     "jsii-release": "^0.2.3",
     "json-schema": "^0.2.5",
-    "projen": "^0.12.2",
+    "projen": "^0.12.10",
     "standard-version": "^9.0.0",
     "ts-jest": "^26.4.4",
     "typescript": "^3.9.5"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-codebuild": "^1.73.0",
-    "@aws-cdk/aws-iam": "^1.73.0",
-    "@aws-cdk/core": "^1.73.0",
-    "@aws-cdk/custom-resources": "^1.73.0",
+    "@aws-cdk/aws-codebuild": "^1.82.0",
+    "@aws-cdk/aws-iam": "^1.82.0",
+    "@aws-cdk/core": "^1.82.0",
+    "@aws-cdk/custom-resources": "^1.82.0",
     "constructs": "^3.2.27"
   },
   "dependencies": {
-    "@aws-cdk/aws-codebuild": "^1.73.0",
-    "@aws-cdk/aws-iam": "^1.73.0",
-    "@aws-cdk/core": "^1.73.0",
-    "@aws-cdk/custom-resources": "^1.73.0"
+    "@aws-cdk/aws-codebuild": "^1.82.0",
+    "@aws-cdk/aws-iam": "^1.82.0",
+    "@aws-cdk/core": "^1.82.0",
+    "@aws-cdk/custom-resources": "^1.82.0"
   },
   "bundledDependencies": [],
   "keywords": [
