@@ -16,6 +16,7 @@ const project = new AwsCdkConstructLibrary({
   ],
   dependabot: false,
   releaseEveryCommit: false,
+  defaultReleaseBranch: ['main'],
 });
 
 // create a custom projen and yarn upgrade workflow
